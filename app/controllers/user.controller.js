@@ -1,3 +1,4 @@
+const { query } = require("express");
 const db = require("../models");
 const User = db.user;
 const Op = db.Sequelize.Op;
@@ -45,6 +46,7 @@ exports.getonuser = (req, res) => {
 // Update a Property by the id in the request
 exports.putonuser = (req, res) => {
   const id = req.params.id;
+  const username = req.query.username;
 
   User.update(req.body, {
     where: { id: id }
@@ -70,6 +72,7 @@ exports.putonuser = (req, res) => {
 // Delete a Property with the specified id in the request
 exports.deleteonuser = (req, res) => {
   const id = req.params.id;
+  const username = req.query.username;
 
   User.destroy({
     where: { id: id }
