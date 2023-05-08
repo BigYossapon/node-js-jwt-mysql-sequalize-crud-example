@@ -2,6 +2,7 @@ const { query } = require("express");
 const db = require("../models");
 const User = db.user;
 const Op = db.Sequelize.Op;
+var bcrypt = require("bcryptjs");
 
 exports.allAccess = (req, res) => {
   res.status(200).send("Public Content.");
@@ -46,9 +47,18 @@ exports.getonuser = (req, res) => {
 // Update a Property by the id in the request
 exports.putonuser = (req, res) => {
   const id = req.params.id;
-  const username = req.query.username;
+  //const username = req.query.username;
+  // const request = {
 
-  User.update(req.body, {
+  // }
+
+  const username = req.body.username;
+  const email = req.body.email;
+  const password = bcrypt.hashSync(req.body.password, 8);
+  const country = req.body.country;
+  const address = req.body.address;
+  const request = { body: { username, email, password, country, address } }
+  User.update(request.body, {
     where: { id: id }
   })
     .then(num => {
@@ -72,7 +82,7 @@ exports.putonuser = (req, res) => {
 // Delete a Property with the specified id in the request
 exports.deleteonuser = (req, res) => {
   const id = req.params.id;
-  const username = req.query.username;
+  //const username = req.query.username;
 
   User.destroy({
     where: { id: id }
