@@ -30,7 +30,13 @@ db.sequelize.sync();
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to application." });
 });
+//ไว้ดึง path รูป
+app.use("/uploads", express.static("uploads"));
+app.use(express.json());
+//app.use(bodyParser.urlencoded({ extended: false }));
 
+// parse application/json
+//app.use(bodyParser.json());
 // routes
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);

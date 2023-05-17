@@ -57,7 +57,8 @@ exports.putonuser = (req, res) => {
   const password = bcrypt.hashSync(req.body.password, 8);
   const country = req.body.country;
   const address = req.body.address;
-  const request = { body: { username, email, password, country, address } }
+  const avartar = req.body.avartar;
+  const request = { body: { username, email, password, country, address, avartar } }
   User.update(request.body, {
     where: { id: id }
   })

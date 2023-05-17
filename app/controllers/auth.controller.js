@@ -15,7 +15,7 @@ exports.signup = (req, res) => {
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8),
     address: req.body.address,
-    avartar: req.body.avartar,
+    avartar: 'avartar_placeholder',
     country: req.body.country
 
   })
